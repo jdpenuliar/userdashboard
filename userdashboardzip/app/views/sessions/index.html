@@ -1,0 +1,62 @@
+<html>
+	<head>
+
+		<link rel="stylesheet" href="/static/bootstrap/css/bootstrap.css" type="text/css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+		<script type="text/javascript" src='/static/bootstrap/js/bootstrap.js'></script>
+		<link rel="stylesheet" href="/static/css/navbar-fixed-top.css" type="text/css">
+	</head>
+	<body>
+		<!-- Fixed navbar -->
+		<nav class="navbar navbar-default navbar-fixed-top">
+			<div class="container">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="/">Test app</a>
+				</div>
+				<div id="navbar" class="navbar-collapse collapse">
+					<ul class="nav navbar-nav">
+						<li><a href="/">Home</a></li>
+						
+					</ul>
+					<ul class="nav navbar-nav navbar-right">
+						<li><a href="/signin">Sign in</a></li>
+					</ul>
+				</div><!--/.nav-collapse -->
+			</div>
+		</nav>
+
+		
+		<div class="container">
+	      <div class="jumbotron">
+	        <h1>Welcome to the Test</h1>
+	        <p>We are going to bulil a cool application using a MVC framework! This application was built with the Village 88 folks!</p>
+	        <p>
+	          <a class="btn btn-primary" href="/signin" role="button">Start</a>
+	        </p>
+	      </div>
+	      <div class="container">
+					<div class="row">
+						<!-- span4 not working or supported anymore -->
+						<div class="col-md-4">
+							<h3>Manage Users</h3>
+							<p>Using this application, you'll learn how to add, remove, and edit users for the application.</p>
+						</div>
+						<div class="col-md-4">
+							<h3>Leave messages</h3>
+							<p>Users will be able to leave a message to another using this application</p>
+						</div>
+						<div class="col-md-4">
+							<h3>Edit User Inforation</h3>
+							<p>Admins will be able to edit another user's information (email address, first name, last name, etc).</p>
+						</div>
+					</div>
+				</div>
+	    </div> <!-- /container -->
+	</body>
+</html>

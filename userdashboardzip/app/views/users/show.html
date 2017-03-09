@@ -1,0 +1,89 @@
+<html>
+	<head>
+
+		<link rel="stylesheet" href="/static/bootstrap/css/bootstrap.css" type="text/css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+		<script type="text/javascript" src='/static/bootstrap/js/bootstrap.js'></script>
+		<link rel="stylesheet" href="/static/css/my_style_sheet.css" type="text/css">
+	</head>
+	<body>
+		<!-- Fixed navbar -->
+		<nav class="navbar navbar-default navbar-fixed-top">
+			<div class="container">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="/">Test app</a>
+				</div>
+				<div id="navbar" class="navbar-collapse collapse">
+					<ul class="nav navbar-nav">
+						<li><a href="/users">Dashboard</a></li>
+					</ul>
+					<ul class="nav navbar-nav">
+						<li><a href="/users/edit">Profile</a></li>
+					</ul>
+					<ul class="nav navbar-nav navbar-right">
+						<li><a href="/logoff">Log off</a></li>
+					</ul>
+				</div><!--/.nav-collapse -->
+			</div>
+		</nav>
+		<div class="container">
+			<div class="row">
+				<h2>{{user['first_name']+ ' ' + user['last_name']}}</h2>
+				<div class="col-sm-3">
+					<p>Registered at:</p>
+					<p>User ID:</p>
+					<p>Email address:</p>
+					<p>Description:</p>
+				</div>
+				<div class="col-sm-3">
+					<p>{{user['created_at']}}</p>
+					<p>{{user['id']}}</p>
+					<p>{{user['email']}}</p>
+					<p>{{user['description']}}</p>
+				</div>
+			</div>
+			
+			<div class="row">
+				<form action='/users/message/{{id}}' class="formPost" method='POST'>
+					<div class="input-group">
+						<input type="text" name="message" class="postInput" placeholder="Post on your mind" aria-describedby="basic-addon1">
+					</div>
+					<button type="submit" class="btn btn-default btnRight">Post Message</button>
+				</form>
+				{% for message in messages: %}
+					<h4>{{ message['postUsername'] }} - {{ message['created_at'] }}</h4>
+					{%if message["user_id"] == session['userID'] and message['deleteEligibility'] == True%}
+						<form action='/delete_message' class="formPost" method='POST'>
+							<input type="hidden" name='deleteMessageID' value='{{message["id"]}}' required>
+							<button type="submit" class="btn btn-default btnRight">Delete Message</button>
+						</form>
+					{%endif%}
+					<p class="message">{{ message['message'] }}</p>
+					<hr>
+					<!-- in the for loop for the messages use the current message id for the query to select the comments kinda like select * from comments where comments.messageid = {{message[iid]}}  or in the loop put an if for the key for comments.message id-->
+					
+					<form action='/users/comment/{{id}}' class="formComment" method='POST'>
+						{% for comment in comments: %}
+							{%if comment['message_id'] == message['id']:%}
+								<p class="comment">{{ comment['comment'] }}</p>
+								<hr>
+							{%endif%}
+						{% endfor %}
+						<div class="input-group">
+							<input type="text" name="message" class="commentInput" placeholder="comment on your mind" aria-describedby="basic-addon1">
+						</div>
+						<input type="hidden" name="commentMessageID" value="{{message['id']}}">
+						<button type="submit" class="btn btn-default btnRight">Post Comment</button>
+					</form>
+				{% endfor %}
+			</div>
+			
+	    </div> <!-- /container -->
+	</body>
+</html>
